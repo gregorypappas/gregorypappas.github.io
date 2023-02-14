@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>enhanced lottie player</title>
+  <style>
+    html {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 100%;
+      height: auto;
+      margin: 0;
+      position: fixed;
+      top: 50%;
+      right: 50%;
+      transform: translate(50%, -50%);
+    }
+  </style>
+  <script src="/misc/shared/libs/bodymovin_5.8.0.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const path = "./637d0cd18f8464e6af7be36a_tech-v7.json"
+
+      let animation = await bodymovin.loadAnimation({
+        container: document.getElementById("player_container"),
+        path,
+        renderer: "svg",
+        loop: false,
+        autoplay: false,
+      });
+
+      animation.addEventListener("data_ready", () => {
+        document.documentElement.style.height = `${animation.totalFrames * 100}vh`
+      });
+
+      document.addEventListener("scroll", (e) => {
+        let totalHeight = document.documentElement.scrollHeight;
+        let scrollFromTop = document.documentElement.scrollTop;
+        let scrollPercentage = Math.round((scrollFromTop * 100) / totalHeight)
+        animation.goToAndStop((scrollPercentage * animation.totalFrames) / 100, true);
+      });
+    });
+  </script>
+</head>
+
+<body id="player_container">
+</body>
+
+</html>
