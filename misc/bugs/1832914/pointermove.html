@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>pointermove</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        font-family: sans-serif;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        let [pX, pY] = Array.from(document.querySelectorAll("p"));
+
+        document.addEventListener("pointermove", ({ clientX, clientY }) => {
+          pX.textContent = `clientX: ${String(clientX).padStart(4, "0")}`;
+          pY.textContent = `clientY: ${String(clientY).padStart(4, "0")}`;
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <p></p>
+    <p></p>
+  </body>
+</html>
